@@ -16,5 +16,20 @@ Explanation: Steps of a possible scenario are:
 The total number of stones in [3,4,5] is 12.
 ```
 ```
-....
+import heapq
+class Solution:
+    def minStoneSum(self, piles: List[int], k: int) -> int:
+        
+        ans=sum(piles)
+        piles=[-pile for pile in piles]
+        heapq.heapify(piles)
+        while k:
+            curr=-heapq.heappop(piles)
+            removal=curr//2
+            heapq.heappush(piles,-(curr-removal))
+            k-=1
+            ans-=removal
+        return ans
+
+
 ```
